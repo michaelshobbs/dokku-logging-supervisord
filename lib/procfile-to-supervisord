@@ -58,7 +58,7 @@ do
   fi
 
   case "$line" in
-    web|worker|urgentworker)
+    web*|worker*|urgentworker*)
       NAME=${line%%:*}
       COMMAND=${line#*: }
       NUM_PROCS=1
