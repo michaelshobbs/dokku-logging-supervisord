@@ -10,15 +10,12 @@ This plugin uses the `docker-args` hook to inject the data volume argument. As s
 ## Installation
 
 ```sh
-# Create the directory to house the log files:
-sudo mkdir -p /var/log/dokku
-sudo chown dokku:dokku /var/log/dokku
-
-# Install the plugin:
 git clone https://github.com/sehrope/dokku-logging-supervisord.git /var/lib/dokku/plugins/logging-supervisord
+dokku plugins-install
 ```
 
 All future deployments will use this plugin to start all processes and all log output will be in `/var/log/dokku/$APP/`.
+Logs are rotated. You may customize logrotate file after deploy, check `/etc/logrotate.d/dokku-app.d/$APP` file.
 
 ## What it does
 
@@ -69,6 +66,11 @@ Rather than editing the file manually you can use the command:
 This will generate a new `SCALE` file and then deploy the app. An app rebuild will __not__ happen. It will just kill and restart your application.
 
 Adding the `SCALE` file is done by copying it into the container. This adds another layer to the container's AUFS. As there is a max number of layers you may need to occasionally run a rebuild (try `dokku rebuild myapp`) to rebase the container.
+
+## Logrotate
+
+This plugin create in directory "/etc/logrotate.d/dokku-app.d" logrotate config for each application.
+If application destroyed, config will be removed only if user don't change it (in app root directory, md5 checksum of config file stored).
 
 ## TODO
 
