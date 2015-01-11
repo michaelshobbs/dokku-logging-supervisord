@@ -61,8 +61,14 @@ do
 
   if [ -f "$SCALEFILE" ]; then
     SCALE=$(egrep "^$NAME=" "$SCALEFILE")
-    if [ -n "$SCALE" ]; then
-      NUM_PROCS=${SCALE#*=}
+    if [ -z "$SCALE" ]; then
+      echo "Not running $NAME as absent in SCALE file" >&2
+      continue
+    fi
+    NUM_PROCS=${SCALE#*=}
+    if [ "$NUM_PROCS" -eq 0 ]; then
+      echo "Not running $NAME as scale is zero" >&2
+      continue
     fi
   fi
 
