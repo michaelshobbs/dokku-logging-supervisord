@@ -12,10 +12,10 @@ This plugin uses the `docker-args` hook to inject the data volume argument. As s
 ```sh
 # Install the plugin:
 # dokku 0.3.x
-git clone https://github.com/sehrope/dokku-logging-supervisord.git /var/lib/dokku/plugins/logging-supervisord
+git clone https://github.com/expa/dokku-logging-supervisord.git /var/lib/dokku/plugins/logging-supervisord
 
 # dokku 0.4+
-dokku plugin:install https://github.com/sehrope/dokku-logging-supervisord.git
+dokku plugin:install https://github.com/expa/dokku-logging-supervisord.git
 ```
 
 All future deployments will use this plugin to start all processes and all log output will be in `/var/log/dokku/$APP/`.
